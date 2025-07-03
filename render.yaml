@@ -1,0 +1,20 @@
+services:
+  - type: cron
+    name: email-automation-arcanos
+    env: python
+    schedule: "*/10 * * * *"  # Executa a cada 10 minutos
+    buildCommand: pip install -r requirements.txt
+    startCommand: python main.py
+    envVars:
+      - key: SHEET_URL
+        value: https://docs.google.com/spreadsheets/d/1VHcC3CKnBBJKjTap_IsGJSku9clD0mjGsHnwc71h5iI/edit#gid=0
+      - key: WORKSHEET_NAME
+        value: Página1
+      - key: EMAIL_SENDER
+        value: madame.celeste7@gmail.com
+      - key: EMAIL_NAME
+        value: Madame Celeste
+      - key: EMAIL_PASS
+        fromGroup: email-secrets
+      - key: GOOGLE_CREDENTIALS_JSON
+        fromGroup: google-secrets
